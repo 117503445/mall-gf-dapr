@@ -1,0 +1,11 @@
+{
+  "name": "mall-js-sdk",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "117503445",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
+  "type": "module"
+}

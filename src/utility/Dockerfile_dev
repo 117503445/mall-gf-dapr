@@ -1,0 +1,4 @@
+FROM 117503445/dev-go
+
+RUN pacman -S nodejs npm yarn
+RUN yarn config set registry https://registry.npmmirror.com/
