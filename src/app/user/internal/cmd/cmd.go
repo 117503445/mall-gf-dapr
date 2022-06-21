@@ -7,7 +7,7 @@ import (
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
 
-	"117503445/mall-gf-dapr/app/api-template/internal/controller"
+	"117503445/mall-gf-dapr/app/user/internal/controller"
 )
 
 var (
@@ -20,7 +20,7 @@ var (
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(ghttp.MiddlewareHandlerResponse)
 				group.Bind(
-					controller.Hello,
+					controller.User,
 				)
 			})
 			s.Run()
