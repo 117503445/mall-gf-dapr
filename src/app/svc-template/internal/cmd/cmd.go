@@ -7,7 +7,7 @@ import (
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
 
-	"mall-gf-dapr/app/svc-template/internal/controller"
+	"117503445/mall-gf-dapr/app/svc-template/internal/controller"
 )
 
 var (

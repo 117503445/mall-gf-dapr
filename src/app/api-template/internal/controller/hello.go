@@ -5,7 +5,7 @@ import (
 
 	"github.com/gogf/gf/v2/frame/g"
 
-	"mall-gf-dapr/app/api-template/api/v1"
+	"117503445/mall-gf-dapr/app/api-template/api/v1"
 )
 
 var (

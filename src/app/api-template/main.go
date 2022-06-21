@@ -1,11 +1,11 @@
 package main
 
 import (
-	_ "mall-gf-dapr/app/api-template/internal/packed"
+	_ "117503445/mall-gf-dapr/app/api-template/internal/packed"
 
 	"github.com/gogf/gf/v2/os/gctx"
 
-	"mall-gf-dapr/app/api-template/internal/cmd"
+	"117503445/mall-gf-dapr/app/api-template/internal/cmd"
 )
 
 func main() {
