@@ -15,3 +15,22 @@ type RigesterReq struct {
 type RigesterRes struct {
 	g.Meta `mime:"application/json"`
 }
+
+type LoginReq struct {
+	g.Meta   `path:"/login" tags:"user" method:"post" summary:"user login"`
+	Mobile   string
+	Password string
+}
+
+type LoginRes struct {
+	g.Meta `mime:"application/json"`
+}
+
+type InfoReq struct {
+	g.Meta `path:"/info" tags:"user" method:"get" summary:"user info"`
+	Id     int64
+}
+
+type InfoRes struct {
+	g.Meta `mime:"application/json"`
+}

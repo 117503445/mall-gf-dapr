@@ -14,7 +14,14 @@ var (
 
 type cUser struct{}
 
-func (c *cUser) Hello(ctx context.Context, req *v1.RigesterReq) (res *v1.RigesterRes, err error) {
-	// g.RequestFromCtx(ctx).Response.Writeln("Hello World!")
+func (c *cUser) Rigester(ctx context.Context, req *v1.RigesterReq) (res *v1.RigesterRes, err error) {
+	return
+}
+
+func (c *cUser) Login(ctx context.Context, req *v1.LoginReq) (res *v1.LoginRes, err error) {
+	return
+}
+
+func (c *cUser) Info(ctx context.Context, req *v1.InfoReq) (res *v1.InfoRes, err error) {
 	return
 }
