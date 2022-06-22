@@ -5,7 +5,7 @@ import (
 )
 
 type RigesterReq struct {
-	g.Meta   `path:"/api/user/register" tags:"user" method:"post" summary:"user register"`
+	g.Meta   `path:"/register" tags:"user" method:"post" summary:"user register"`
 	Name     string
 	Gender   int
 	Mobile   string
@@ -13,5 +13,5 @@ type RigesterReq struct {
 }
 
 type RigesterRes struct {
-	g.Meta `mime:"text/json"`
+	g.Meta `mime:"application/json"`
 }

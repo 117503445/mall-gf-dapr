@@ -1,7 +1,10 @@
 version: "3.9"
 services:
   dev:
-    image: 117503445/dev-golang
+    build:
+      context: ./src/script
+      dockerfile: Dockerfile_dev
+
     restart: unless-stopped
     ports:
       - "8080:8080"
