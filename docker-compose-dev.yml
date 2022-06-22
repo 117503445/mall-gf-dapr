@@ -9,3 +9,20 @@ services:
       - ./:/root/project/mall-gf-dapr
     stdin_open: true
     tty: true
+  db:
+    image: mysql
+    restart: unless-stopped
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345678
+      - MYSQL_ROOT_HOST=%
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: unless-stopped
+    ports:
+      - 3307:80
