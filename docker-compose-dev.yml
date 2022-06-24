@@ -6,8 +6,6 @@ services:
       dockerfile: Dockerfile_dev
 
     restart: unless-stopped
-    ports:
-      - "8080:8080"
     volumes:
       - ./:/root/project/mall-gf-dapr
     stdin_open: true
@@ -15,8 +13,6 @@ services:
   db:
     image: mysql
     restart: unless-stopped
-    ports:
-      - '3306:3306'
     environment:
       - MYSQL_ROOT_PASSWORD=12345678
       - MYSQL_ROOT_HOST=%
