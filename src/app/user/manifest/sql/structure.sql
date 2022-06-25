@@ -12,5 +12,5 @@ CREATE TABLE `user` (
     `password` varchar(255) NOT NULL DEFAULT '' COMMENT '用户密码',
     
     PRIMARY KEY (`id`),
-    UNIQUE KEY `idx_mobile_unique` (`mobile`)
+    UNIQUE KEY `idx_name_unique` (`name`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
