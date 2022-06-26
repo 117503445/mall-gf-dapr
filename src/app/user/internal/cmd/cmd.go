@@ -28,6 +28,11 @@ var (
 							controller.User,
 						)
 					})
+					group.Group("/operation", func(group *ghttp.RouterGroup) {
+						group.Bind(
+							controller.Operation,
+						)
+					})
 				})
 			})
 			s.Run()

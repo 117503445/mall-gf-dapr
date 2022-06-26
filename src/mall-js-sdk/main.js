@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 function assertSuccess(response) {
@@ -7,6 +6,12 @@ function assertSuccess(response) {
         throw 'code != 0';
     }
 }
+
+async function initDB() {
+    await axios.post("http://127.0.0.1:8000/api/operation/initDB")
+}
+
+await initDB()
 
 let response = await axios.post("http://127.0.0.1:8000/api/user/register", {
     'mobile': '13766667777',
