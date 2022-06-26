@@ -14,5 +14,10 @@ type cOperation struct{}
 
 func (c *cOperation) InitDB(ctx context.Context, req *v1.InitDBReq) (res *v1.InitDBRes, err error) {
 	utility.InitDB(ctx)
-	return nil, nil
+	return &v1.InitDBRes{
+		MetaInfo: utility.RspMetaInfo{
+			Code: 0,
+			Msg:  "ok",
+		},
+	}, nil
 }

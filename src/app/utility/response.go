@@ -2,21 +2,21 @@ package utility
 
 import (
 	"fmt"
+	"reflect"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/net/gtrace"
 )
 
-// ExpectedError is expected error
-type ExpectedError struct {
+type RspMetaInfo struct {
 	Code int
 	Msg  string
 }
 
-func (e ExpectedError) Error() string {
-	return fmt.Sprintf("ExpectedError: Code = %d, Msg = %s", e.Code, e.Msg)
-}
+// func (e ExpectedError) Error() string {
+// 	return fmt.Sprintf("ExpectedError: Code = %d, Msg = %s", e.Code, e.Msg)
+// }
 
 // Response handling res object to http response.
 func Response(r *ghttp.Request) {
@@ -40,18 +40,23 @@ func Response(r *ghttp.Request) {
 		msg  string
 		code int
 	)
-
+	// TODO(QHT): handle nil
 	if err == nil {
-		code = 0
-		msg = "success"
-	} else {
-		if expectedError, ok := err.(ExpectedError); ok {
-			code = expectedError.Code
-			msg = expectedError.Msg
-		} else {
-			code = 500
-			msg = fmt.Sprintf("服务器内部错误, 请联系开发者, 请求 ID = %v", gtrace.GetTraceID(r.Context()))
+		a := r.GetHandlerResponse()
+		g.Log().Debug(r.Context(), a)
+		b := reflect.ValueOf(a)
+		g.Log().Debug(r.Context(), b)
+		c := reflect.Indirect(b)
+		g.Log().Debug(r.Context(), c)
+
+		code = int(c.FieldByName("MetaInfo").FieldByName("Code").Int())
+		msg = c.FieldByName("MetaInfo").FieldByName("Msg").String()
+		if msg == "" {
+			msg = "success"
 		}
+	} else {
+		code = 500
+		msg = fmt.Sprintf("服务器内部错误, 请联系开发者, 请求 ID = %v", gtrace.GetTraceID(r.Context()))
 	}
 
 	internalErr := r.Response.WriteJson(ghttp.DefaultHandlerResponse{

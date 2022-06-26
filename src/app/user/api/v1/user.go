@@ -1,6 +1,8 @@
 package v1
 
 import (
+	"117503445/mall-gf-dapr/app/utility"
+
 	"github.com/gogf/gf/v2/frame/g"
 )
 
@@ -13,7 +15,8 @@ type RigesterReq struct {
 }
 
 type RigesterRes struct {
-	g.Meta `mime:"application/json"`
+	g.Meta   `mime:"application/json"`
+	MetaInfo utility.RspMetaInfo `json:"-"`
 }
 
 type LoginReq struct {
@@ -23,7 +26,8 @@ type LoginReq struct {
 }
 
 type LoginRes struct {
-	g.Meta `mime:"application/json"`
+	g.Meta   `mime:"application/json"`
+	MetaInfo utility.RspMetaInfo `json:"-"`
 }
 
 type InfoReq struct {
@@ -32,5 +36,6 @@ type InfoReq struct {
 }
 
 type InfoRes struct {
-	g.Meta `mime:"application/json"`
+	g.Meta   `mime:"application/json"`
+	MetaInfo utility.RspMetaInfo `json:"-"`
 }
