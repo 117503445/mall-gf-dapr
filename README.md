@@ -17,3 +17,12 @@ cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/user -l "mysql:root
 <https://learnku.com/articles/64567>
 
 <https://github.com/nivin-studio/go-zero-mall>
+
+## services
+
+- casdoor http://localhost:18000
+- apisix 
+- user
+- product http://localhost:8001
+- order http://localhost:8002
+- pay http://localhost:8003
