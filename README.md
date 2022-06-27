@@ -13,6 +13,14 @@ cd /root/project/mall-gf-dapr/src/mall-js-sdk && node main.js
 cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/user -l "mysql:root:12345678@tcp(db:3306)/user"
 ```
 
+http://localhost:3307/
+
+create database: casdoor
+
+http://localhost:18000/
+
+./src/script/casdoor/init.sql
+
 ## api
 
 <https://learnku.com/articles/64567>
