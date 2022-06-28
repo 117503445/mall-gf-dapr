@@ -4,6 +4,7 @@ import (
 	v1 "117503445/mall-gf-dapr/app/product/api/v1"
 	"117503445/mall-gf-dapr/app/product/internal/service"
 	"117503445/mall-gf-dapr/app/product/model/entity"
+	"117503445/mall-gf-dapr/app/utility"
 	"context"
 
 	"github.com/gogf/gf/v2/util/gconv"
@@ -33,6 +34,15 @@ func (c *cProduct) GetById(ctx context.Context, req *v1.GetReq) (*v1.GetRes, err
 	product, err := service.Product.GetById(ctx, req.Id)
 	if err != nil {
 		return nil, err
+	}
+
+	if product == nil {
+		return &v1.GetRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 1,
+				Msg:  "产品不存在",
+			},
+		}, nil
 	}
 
 	res := &v1.GetRes{}

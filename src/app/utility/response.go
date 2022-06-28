@@ -39,6 +39,7 @@ func Response(r *ghttp.Request) {
 	var (
 		msg  string
 		code int
+		data interface{}
 	)
 	if err == nil {
 		metaPtr := reflect.Indirect(reflect.ValueOf(r.GetHandlerResponse()))
@@ -46,9 +47,11 @@ func Response(r *ghttp.Request) {
 			code = int(metaPtr.FieldByName("MetaInfo").FieldByName("Code").Int())
 			msg = metaPtr.FieldByName("MetaInfo").FieldByName("Msg").String()
 		}
-
-		if msg == "" {
-			msg = "success"
+		if code == 0 {
+			data = r.GetHandlerResponse()
+			if msg == "" {
+				msg = "success"
+			}
 		}
 	} else {
 		code = 500
@@ -58,7 +61,7 @@ func Response(r *ghttp.Request) {
 	internalErr := r.Response.WriteJson(ghttp.DefaultHandlerResponse{
 		Code:    code,
 		Message: msg,
-		Data:    r.GetHandlerResponse(),
+		Data:    data,
 	})
 	if internalErr != nil {
 		g.Log().Errorf(r.Context(), "internalErr = %+v", internalErr)

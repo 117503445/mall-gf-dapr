@@ -1,9 +1,13 @@
 import axios from 'axios';
 
 function assertSuccess(response) {
-    if (response['code'] != 0) {
+    assertCode(response, 0)
+}
+
+function assertCode(response, code) {
+    if (response.data['code'] != code) {
         console.log(response)
-        throw 'code != 0';
+        throw `rsp.code = ${response.data['code']}, code = ${code}`;
     }
 }
 
@@ -46,9 +50,12 @@ let response = await axios.post("http://127.0.0.1:8001/api/product", {
     'stock': 100,
     'price': 5,
 });
-assertSuccess(response.data)
+assertSuccess(response)
 
 response = await axios.get("http://127.0.0.1:8001/api/product/1");
-assertSuccess(response.data)
+assertSuccess(response)
+
+response = await axios.get("http://127.0.0.1:8001/api/product/2");
+assertCode(response, 1)
 
 console.log('success')
