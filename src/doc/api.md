@@ -117,7 +117,7 @@ Authorization: Bearer {"userID": 1}
 ### 产品详情
 
 ```http
-GET http://localhost:8001/api/product?id=1
+GET http://localhost:8001/api/product/1
 
 Authorization: Bearer {"userID": 1}
 ```

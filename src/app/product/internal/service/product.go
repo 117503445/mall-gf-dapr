@@ -14,3 +14,8 @@ func (s *productService) Create(ctx context.Context, product *entity.Product) (e
 	_, err = dao.Product.Ctx(ctx).Data(product).Insert()
 	return err
 }
+
+func (s *productService) GetById(ctx context.Context, id int) (product *entity.Product, err error) {
+	err = dao.Product.Ctx(ctx).Where(dao.Product.Columns().Id, id).Scan(&product)
+	return product, err
+}

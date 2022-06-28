@@ -7,11 +7,12 @@ function assertSuccess(response) {
     }
 }
 
-// async function initDB() {
-//     await axios.post("http://127.0.0.1:8000/api/operation/initDB")
-// }
+async function initDB() {
+    // await axios.post("http://127.0.0.1:8000/api/operation/initDB")
+    await axios.post("http://127.0.0.1:8001/api/operation/initDB")
+}
 
-// await initDB()
+await initDB()
 
 // let response = await axios.post("http://127.0.0.1:8000/api/user/register", {
 //     'mobile': '13766667777',
@@ -45,6 +46,9 @@ let response = await axios.post("http://127.0.0.1:8001/api/product", {
     'stock': 100,
     'price': 5,
 });
+assertSuccess(response.data)
+
+response = await axios.get("http://127.0.0.1:8001/api/product/1");
 assertSuccess(response.data)
 
 console.log('success')
