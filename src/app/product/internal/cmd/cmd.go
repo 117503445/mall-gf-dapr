@@ -25,7 +25,7 @@ var (
 				group.Group("/api", func(group *ghttp.RouterGroup) {
 					group.Group("/product", func(group *ghttp.RouterGroup) {
 						group.Bind(
-							// controller.product,
+							controller.Product,
 						)
 					})
 					group.Group("/operation", func(group *ghttp.RouterGroup) {
