@@ -40,17 +40,13 @@ func Response(r *ghttp.Request) {
 		msg  string
 		code int
 	)
-	// TODO(QHT): handle nil
 	if err == nil {
-		a := r.GetHandlerResponse()
-		g.Log().Debug(r.Context(), a)
-		b := reflect.ValueOf(a)
-		g.Log().Debug(r.Context(), b)
-		c := reflect.Indirect(b)
-		g.Log().Debug(r.Context(), c)
+		metaPtr := reflect.Indirect(reflect.ValueOf(r.GetHandlerResponse()))
+		if metaPtr.IsValid() {
+			code = int(metaPtr.FieldByName("MetaInfo").FieldByName("Code").Int())
+			msg = metaPtr.FieldByName("MetaInfo").FieldByName("Msg").String()
+		}
 
-		code = int(c.FieldByName("MetaInfo").FieldByName("Code").Int())
-		msg = c.FieldByName("MetaInfo").FieldByName("Msg").String()
 		if msg == "" {
 			msg = "success"
 		}
