@@ -10,6 +10,7 @@ CREATE TABLE `product` (
     `desc`        varchar(255)        NOT NULL DEFAULT '' COMMENT '产品描述',
     `stock`       int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '产品库存',
     `price`       int(10) unsigned    NOT NULL DEFAULT '0' COMMENT '产品金额',
-    
+    `creator_id`  varchar(36)         NOT NULL DEFAULT '' COMMENT '创建者的 UUID | "44ec60c4-1434-47a6-a9c2-443eb1ac27c8"',
+
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
