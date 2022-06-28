@@ -24,3 +24,8 @@ func (s *productService) DeleteById(ctx context.Context, id int) (err error) {
 	_, err = dao.Product.Ctx(ctx).Where(dao.Product.Columns().Id, id).Delete()
 	return err
 }
+
+func (s *productService) UpdateById(ctx context.Context, id int, product *entity.Product) (err error) {
+	_, err = dao.Product.Ctx(ctx).Where(dao.Product.Columns().Id, id).Data(product).Update()
+	return err
+}

@@ -62,3 +62,34 @@ func (c *cProduct) DeleteById(ctx context.Context, req *v1.DeleteReq) (*v1.Delet
 
 	return nil, nil
 }
+
+func (c *cProduct) UpdateById(ctx context.Context, req *v1.UpdateReq) (*v1.UpdateRes, error) {
+	product, err := service.Product.GetById(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	if product == nil {
+		return &v1.UpdateRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 1,
+				Msg:  "产品不存在",
+			},
+		}, nil
+	}
+
+	// TODO(QHT): check 库存小于已售物品
+
+	product = &entity.Product{}
+
+	if err := gconv.Struct(req, &product); err != nil {
+		return nil, err
+	}
+
+	err = service.Product.UpdateById(ctx, req.Id, product)
+	if err != nil {
+		return nil, err
+	}
+
+	return nil, nil
+}

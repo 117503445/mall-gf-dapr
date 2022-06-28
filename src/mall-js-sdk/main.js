@@ -58,10 +58,20 @@ assertSuccess(response)
 response = await axios.get("http://127.0.0.1:8001/api/product/2");
 assertCode(response, 1)
 
-response = await axios.delete("http://127.0.0.1:8001/api/product/1");
-assertCode(response, 0)
+
+response = await axios.put("http://127.0.0.1:8001/api/product/1",
+    {
+        "name": "香蕉",
+        "desc": "这个一个又大又圆的香蕉，5块钱一个！",
+        "stock": 100,
+        "price": 5
+    });
+assertSuccess(response)
 
 response = await axios.delete("http://127.0.0.1:8001/api/product/1");
-assertCode(response, 0)
+assertSuccess(response)
+
+response = await axios.delete("http://127.0.0.1:8001/api/product/1");
+assertSuccess(response)
 
 console.log('success')

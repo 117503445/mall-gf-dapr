@@ -17,6 +17,7 @@ type CreateReq struct {
 type CreateRes struct {
 	g.Meta   `mime:"application/json"`
 	MetaInfo utility.RspMetaInfo `json:"-"`
+	// Id int // TODO(QHT): add id field
 }
 
 type GetReq struct {
@@ -32,6 +33,22 @@ type GetRes struct {
 	Stock  int
 	Price  int
 }
+
+
+type UpdateReq struct {
+	g.Meta `path:"/:id" tags:"product" method:"put"`
+	Id     int
+	Name   string
+	Desc   string
+	Stock  int
+	Price  int
+}
+
+type UpdateRes struct {
+	g.Meta   `mime:"application/json"`
+	MetaInfo utility.RspMetaInfo `json:"-"`
+}
+
 
 type DeleteReq struct {
 	g.Meta `path:"/:id" tags:"product" method:"delete"`

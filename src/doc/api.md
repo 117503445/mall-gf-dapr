@@ -112,7 +112,7 @@ Authorization: Bearer {"userID": 1}
 | name   	| 商品名 	|
 | desc   	| 描述   	|
 | stock  	| 库存   	|
-| price 	| 价格   	|
+| price 	| 当前价格 	|
 
 ### 产品详情
 
@@ -144,14 +144,18 @@ Authorization: Bearer {"userID": 1}
 
 ### 产品更新
 
+需传递所有字段
+
 ```http
-PUT http://localhost:8001/api/product?id=1
+PUT http://localhost:8001/api/product/1
 
 Authorization: Bearer {"userID": 1}
 
 {
     "name": "香蕉",
     "desc": "这个一个又大又圆的香蕉，5块钱一个！",
+    "stock": 100,
+    "price": 5
 }
 ```
 
@@ -171,6 +175,12 @@ Authorization: Bearer {"userID": 1}
 {
     "code": 1,
     "message": "产品不存在",
+    "data": null
+}
+
+{
+    "code": 2,
+    "message": "库存小于已售物品",
     "data": null
 }
 ```
