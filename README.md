@@ -8,6 +8,7 @@ microservice mall based on goframe and dapr
 docker-compose -f docker-compose-dev.yml up -d
 cd /root/project/mall-gf-dapr/src/app/user && gf run main.go
 cd /root/project/mall-gf-dapr/src/app/template && gf run main.go
+cd /root/project/mall-gf-dapr/src/app/product && gf run main.go
 cd /root/project/mall-gf-dapr/src/mall-js-sdk && node main.js
 
 cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/user -l "mysql:root:12345678@tcp(db:3306)/user"
