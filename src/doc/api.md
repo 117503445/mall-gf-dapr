@@ -178,7 +178,7 @@ Authorization: Bearer {"userID": 1}
 ### 产品删除
 
 ```http
-DELETE http://localhost:8001/api/product?id=1
+DELETE http://localhost:8001/api/product/1
 
 Authorization: Bearer {"userID": 1}
 ```
@@ -187,12 +187,6 @@ Authorization: Bearer {"userID": 1}
 {
     "code": 0,
     "message": "success",
-    "data": null
-}
-
-{
-    "code": 1,
-    "message": "产品不存在",
     "data": null
 }
 ```

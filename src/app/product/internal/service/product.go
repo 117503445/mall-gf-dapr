@@ -19,3 +19,8 @@ func (s *productService) GetById(ctx context.Context, id int) (product *entity.P
 	err = dao.Product.Ctx(ctx).Where(dao.Product.Columns().Id, id).Scan(&product)
 	return product, err
 }
+
+func (s *productService) DeleteById(ctx context.Context, id int) (err error) {
+	_, err = dao.Product.Ctx(ctx).Where(dao.Product.Columns().Id, id).Delete()
+	return err
+}

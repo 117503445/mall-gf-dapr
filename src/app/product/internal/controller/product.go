@@ -53,3 +53,12 @@ func (c *cProduct) GetById(ctx context.Context, req *v1.GetReq) (*v1.GetRes, err
 
 	return res, nil
 }
+
+func (c *cProduct) DeleteById(ctx context.Context, req *v1.DeleteReq) (*v1.DeleteRes, error) {
+	err := service.Product.DeleteById(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return nil, nil
+}

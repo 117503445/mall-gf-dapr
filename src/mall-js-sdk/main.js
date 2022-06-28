@@ -58,4 +58,10 @@ assertSuccess(response)
 response = await axios.get("http://127.0.0.1:8001/api/product/2");
 assertCode(response, 1)
 
+response = await axios.delete("http://127.0.0.1:8001/api/product/1");
+assertCode(response, 0)
+
+response = await axios.delete("http://127.0.0.1:8001/api/product/1");
+assertCode(response, 0)
+
 console.log('success')
