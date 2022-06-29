@@ -52,6 +52,7 @@ func Response(r *ghttp.Request) {
 	)
 	if err == nil {
 		metaPtr := reflect.Indirect(reflect.ValueOf(r.GetHandlerResponse()))
+		// if *res is nil, metaPtr.IsValid() == false
 		if metaPtr.IsValid() {
 			code = int(metaPtr.FieldByName("MetaInfo").FieldByName("Code").Int())
 			msg = metaPtr.FieldByName("MetaInfo").FieldByName("Msg").String()

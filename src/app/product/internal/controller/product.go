@@ -84,6 +84,20 @@ func (c *cProduct) UpdateById(ctx context.Context, req *v1.UpdateReq) (*v1.Updat
 		}, nil
 	}
 
+	userID, err := utility.GetUserID(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	if product.CreatorId != userID {
+		return &v1.UpdateRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 2,
+				Msg:  "非产品创建者",
+			},
+		}, nil
+	}
+
 	// TODO(QHT): check 库存小于已售物品
 
 	product = &entity.Product{}

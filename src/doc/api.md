@@ -84,10 +84,10 @@ Authorization: Bearer {"userID": 1}
 
 ### 产品创建
 
+need login
+
 ```http
 POST http://localhost:8001/api/product
-
-Authorization: Bearer {"userID": 1}
 
 {
     "name": "苹果",
@@ -118,8 +118,6 @@ Authorization: Bearer {"userID": 1}
 
 ```http
 GET http://localhost:8001/api/product/1
-
-Authorization: Bearer {"userID": 1}
 ```
 
 ```json
@@ -145,6 +143,8 @@ Authorization: Bearer {"userID": 1}
 ### 产品更新
 
 需传递所有字段
+
+只有产品创建者有权限修改
 
 ```http
 PUT http://localhost:8001/api/product/1
@@ -180,6 +180,12 @@ Authorization: Bearer {"userID": 1}
 
 {
     "code": 2,
+    "message": "非产品创建者",
+    "data": null
+}
+
+{
+    "code": 3,
     "message": "库存小于已售物品",
     "data": null
 }
