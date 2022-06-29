@@ -205,6 +205,18 @@ Authorization: Bearer {"userID": 1}
     "message": "success",
     "data": null
 }
+
+{
+    "code": 1,
+    "message": "产品不存在",
+    "data": null
+}
+
+{
+    "code": 2,
+    "message": "非产品创建者",
+    "data": null
+}
 ```
 
 ## 订单 order

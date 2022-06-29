@@ -84,13 +84,13 @@ response = await axios.put("http://127.0.0.1:8001/api/product/1",
         "desc": "这个一个又大又圆的香蕉，5块钱一个！",
         "stock": 100,
         "price": 5
-    });
+    }, getHeader());
 assertSuccess(response)
 
-response = await axios.delete("http://127.0.0.1:8001/api/product/1");
+response = await axios.delete("http://127.0.0.1:8001/api/product/1", getHeader());
 assertSuccess(response)
 
-response = await axios.delete("http://127.0.0.1:8001/api/product/1");
+response = await axios.delete("http://127.0.0.1:8001/api/product/1", getHeader());
 assertSuccess(response)
 
 console.log('success')

@@ -61,7 +61,36 @@ func (c *cProduct) GetById(ctx context.Context, req *v1.GetReq) (*v1.GetRes, err
 }
 
 func (c *cProduct) DeleteById(ctx context.Context, req *v1.DeleteReq) (*v1.DeleteRes, error) {
-	err := service.Product.DeleteById(ctx, req.Id)
+
+	product, err := service.Product.GetById(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	if product == nil {
+		return &v1.DeleteRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 1,
+				Msg:  "产品不存在",
+			},
+		}, nil
+	}
+
+	userID, err := utility.GetUserID(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	if product.CreatorId != userID {
+		return &v1.DeleteRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 2,
+				Msg:  "非产品创建者",
+			},
+		}, nil
+	}
+
+	err = service.Product.DeleteById(ctx, req.Id)
 	if err != nil {
 		return nil, err
 	}
