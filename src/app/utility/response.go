@@ -9,6 +9,15 @@ import (
 	"github.com/gogf/gf/v2/net/gtrace"
 )
 
+type ExpectedError struct {
+	Code int
+	Msg  string
+}
+
+func (e ExpectedError) Error() string {
+	return fmt.Sprintf("ExpectedError, code = %d, msg = %s", e.Code, e.Msg)
+}
+
 type RspMetaInfo struct {
 	Code int
 	Msg  string
@@ -54,8 +63,13 @@ func Response(r *ghttp.Request) {
 			}
 		}
 	} else {
-		code = 500
-		msg = fmt.Sprintf("服务器内部错误, 请联系开发者, 请求 ID = %v", gtrace.GetTraceID(r.Context()))
+		if expectedError, ok := err.(ExpectedError); ok {
+			code = expectedError.Code
+			msg = expectedError.Msg
+		} else {
+			code = 500
+			msg = fmt.Sprintf("服务器内部错误, 请联系开发者, 请求 ID = %v", gtrace.GetTraceID(r.Context()))
+		}
 	}
 
 	internalErr := r.Response.WriteJson(ghttp.DefaultHandlerResponse{

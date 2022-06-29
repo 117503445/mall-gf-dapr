@@ -18,8 +18,14 @@ type cProduct struct{}
 
 func (c *cProduct) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, error) {
 
-	product := &entity.Product{CreatorId: "TODO"}
-	if err := gconv.Struct(req, &product); err != nil {
+	userID, err := utility.GetUserID(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	product := &entity.Product{CreatorId: userID}
+	if err = gconv.Struct(req, &product); err != nil {
 		return nil, err
 	}
 

@@ -2,7 +2,7 @@ version: "3.9"
 services:
   dev:
     build:
-      context: ./src/script
+      context: ./src/script/dev
       dockerfile: Dockerfile_dev
 
     restart: unless-stopped
@@ -18,6 +18,8 @@ services:
       - MYSQL_ROOT_HOST=%
     volumes:
       - ./_data/mysql:/var/lib/mysql
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE to avoid 'mbind: Operation not permitted'
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
@@ -28,7 +30,8 @@ services:
     ports:
       - 3307:80
   casdoor:
-    image: casbin/casdoor@sha256:466a495dd6bfee08caf3d42249722139f41ac4bee9ef708b9294bfab4e0e7f69
+    image: casbin/casdoor
+    # image: casbin/casdoor@sha256:466a495dd6bfee08caf3d42249722139f41ac4bee9ef708b9294bfab4e0e7f69
     restart: unless-stopped
     ports:
     - 18000:18000

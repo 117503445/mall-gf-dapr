@@ -17,11 +17,14 @@ var (
 		Usage: "main",
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
+			utility.InitCasdoor(ctx)
 			s := g.Server()
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(utility.CORS)
 				group.Middleware(utility.HTTPLog)
 				group.Middleware(utility.Response)
+				group.Middleware(utility.Auth)
+
 				group.Group("/api", func(group *ghttp.RouterGroup) {
 					group.Group("/product", func(group *ghttp.RouterGroup) {
 						group.Bind(

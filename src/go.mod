@@ -5,7 +5,16 @@ go 1.18
 require github.com/gogf/gf/v2 v2.0.4
 
 require (
+	github.com/golang-jwt/jwt/v4 v4.1.0 // indirect
+	github.com/golang/protobuf v1.5.2 // indirect
+	golang.org/x/oauth2 v0.0.0-20210514164344-f6687ab2804c // indirect
+	google.golang.org/appengine v1.6.6 // indirect
+	google.golang.org/protobuf v1.26.0 // indirect
+)
+
+require (
 	github.com/BurntSushi/toml v0.4.1 // indirect
+	github.com/casdoor/casdoor-go-sdk v0.4.1
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/clbanning/mxj/v2 v2.5.5 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect

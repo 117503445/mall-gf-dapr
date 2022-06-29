@@ -15,3 +15,10 @@ database:
   debug: true
   sqlOnBoot:
     - "./manifest/sql/structure.sql"
+
+casdoor:
+  endpoint: "http://casdoor:18000"
+  clientId: "325462fc3558deaf360b"
+  clientSecret: "8c1a94f8d0f58d77a37beff8b7a54f9d58a53bf9"
+  organizationName: "mall"
+  applicationName: "experiment-helper"
