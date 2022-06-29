@@ -3,11 +3,11 @@ services:
   dev:
     build:
       context: ./src/script/dev
-      dockerfile: Dockerfile_dev
-
     restart: unless-stopped
     volumes:
       - ./:/root/project/mall-gf-dapr
+      - /var/run/docker.sock:/var/run/docker.sock # for dapr
+      - ~/.dapr:/root/.dapr
     stdin_open: true
     tty: true
   db:

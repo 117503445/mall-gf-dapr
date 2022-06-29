@@ -13,6 +13,7 @@ cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/user -l "mysql:root
 cd /root/project/mall-gf-dapr/src/app/template && gf run main.go
 
 cd /root/project/mall-gf-dapr/src/app/product && gf run main.go
+cd /root/project/mall-gf-dapr/src/app/product && dapr run --app-port 8001 --app-id product --app-protocol http --dapr-http-port 28001 -- gf run main.go
 cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/product -l "mysql:root:12345678@tcp(db:3306)/product"
 
 cd /root/project/mall-gf-dapr/src/mall-js-sdk && node main.js

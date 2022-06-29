@@ -1,4 +1,0 @@
-FROM 117503445/dev-golang
-
-RUN pacman -S nodejs npm yarn --noconfirm
-RUN yarn config set registry https://registry.npmmirror.com/
