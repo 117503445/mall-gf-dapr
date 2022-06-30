@@ -10,9 +10,18 @@ var Product = new(productService)
 
 type productService struct{}
 
-func (s *productService) Create(ctx context.Context, product *entity.Product) (err error) {
-	_, err = dao.Product.Ctx(ctx).Data(product).Insert()
-	return err
+func (s *productService) Create(ctx context.Context, product *entity.Product) (id int64, err error) {
+	result, err := dao.Product.Ctx(ctx).Data(product).Insert()
+	if err != nil {
+		return 0, nil
+	}
+
+	id, err = result.LastInsertId()
+	if err != nil {
+		return 0, err
+	}
+
+	return id, nil
 }
 
 func (s *productService) GetById(ctx context.Context, id int) (product *entity.Product, err error) {

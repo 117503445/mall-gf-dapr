@@ -31,11 +31,14 @@ func (c *cProduct) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes
 		return nil, err
 	}
 
-	if err := service.Product.Create(ctx, product); err != nil {
+	id, err := service.Product.Create(ctx, product)
+	if err != nil {
 		return nil, err
 	}
 
-	return nil, nil
+	return &v1.CreateRes{
+		Id: int(id),
+	}, nil
 }
 
 func (c *cProduct) GetById(ctx context.Context, req *v1.GetReq) (*v1.GetRes, error) {

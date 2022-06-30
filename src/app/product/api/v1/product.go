@@ -17,7 +17,7 @@ type CreateReq struct {
 type CreateRes struct {
 	g.Meta   `mime:"application/json"`
 	MetaInfo utility.RspMetaInfo `json:"-"`
-	// Id int // TODO(QHT): add id field
+	Id int
 }
 
 type GetReq struct {

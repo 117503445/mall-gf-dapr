@@ -72,14 +72,13 @@ response = await axios.post("http://127.0.0.1:8001/api/product", {
 }, getHeader());
 assertSuccess(response)
 
-response = await axios.get("http://127.0.0.1:8001/api/product/1");
+response = await axios.get("http://127.0.0.1:8001/api/product/2");
 assertSuccess(response)
 
-response = await axios.get("http://127.0.0.1:8001/api/product/2");
+response = await axios.get("http://127.0.0.1:8001/api/product/114514"); // not exists
 assertCode(response, 1)
 
-
-response = await axios.put("http://127.0.0.1:8001/api/product/1",
+response = await axios.put("http://127.0.0.1:8001/api/product/2",
     {
         "name": "香蕉",
         "desc": "这个一个又大又圆的香蕉，5块钱一个！",
@@ -88,10 +87,10 @@ response = await axios.put("http://127.0.0.1:8001/api/product/1",
     }, getHeader());
 assertSuccess(response)
 
-response = await axios.delete("http://127.0.0.1:8001/api/product/1", getHeader());
+response = await axios.delete("http://127.0.0.1:8001/api/product/2", getHeader());
 assertSuccess(response)
 
-response = await axios.delete("http://127.0.0.1:8001/api/product/1", getHeader());
+response = await axios.delete("http://127.0.0.1:8001/api/product/2", getHeader());
 assertCode(response, 1)
 
 console.log('success')

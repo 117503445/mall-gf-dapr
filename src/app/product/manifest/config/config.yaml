@@ -15,6 +15,7 @@ database:
   debug: true
   sqlOnBoot:
     - "./manifest/sql/structure.sql"
+    - "./manifest/sql/dev-data.sql"
 
 casdoor:
   endpoint: "http://casdoor:18000"
