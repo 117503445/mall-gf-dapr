@@ -17,7 +17,7 @@ function assertSuccess(response) {
 
 function assertCode(response, code) {
     if (response.data['code'] != code) {
-        console.log(response)
+        console.log("response", response)
         throw `rsp.code = ${response.data['code']}, code = ${code}`;
     }
 }
@@ -93,4 +93,8 @@ assertSuccess(response)
 response = await axios.delete("http://127.0.0.1:8001/api/product/2", getHeader());
 assertCode(response, 1)
 
-console.log('success')
+console.log('product success')
+
+await axios.post("http://127.0.0.1:8002/api/order", {}, getHeader());
+
+console.log('order success')
