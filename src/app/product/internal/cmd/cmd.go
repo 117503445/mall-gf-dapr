@@ -2,12 +2,15 @@ package cmd
 
 import (
 	"context"
+	"net/http"
 
+	daprd "github.com/dapr/go-sdk/service/http"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
 
 	"117503445/mall-gf-dapr/app/product/internal/controller"
+	"117503445/mall-gf-dapr/app/product/internal/rpc"
 	"117503445/mall-gf-dapr/app/utility"
 )
 
@@ -38,6 +41,19 @@ var (
 					})
 				})
 			})
+
+			go func() {
+				daprServer := daprd.NewService(":28001")
+
+				if err := daprServer.AddServiceInvocationHandler("echo", rpc.EchoHandler); err != nil {
+					g.Log().Line(true).Error(ctx, err)
+				}
+				g.Log().Line(true).Debug(ctx, "starting dapr server",)
+				if err := daprServer.Start(); err != nil && err != http.ErrServerClosed {
+					g.Log().Line(true).Error(ctx, err)
+				}
+			}()
+
 			s.Run()
 			return nil
 		},

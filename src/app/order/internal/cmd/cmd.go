@@ -2,12 +2,15 @@ package cmd
 
 import (
 	"context"
+	"net/http"
 
+	daprd "github.com/dapr/go-sdk/service/http"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
 
 	"117503445/mall-gf-dapr/app/order/internal/controller"
+	"117503445/mall-gf-dapr/app/order/internal/service"
 	"117503445/mall-gf-dapr/app/utility"
 )
 
@@ -17,6 +20,9 @@ var (
 		Usage: "main",
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
+
+			service.InitDapr()
+
 			s := g.Server()
 			s.Group("/", func(group *ghttp.RouterGroup) {
 				group.Middleware(utility.CORS)
@@ -35,6 +41,17 @@ var (
 					})
 				})
 			})
+
+			go func() {
+				daprServer := daprd.NewService(":28002")
+
+
+				g.Log().Line(true).Debug(ctx, "starting dapr server",)
+				if err := daprServer.Start(); err != nil && err != http.ErrServerClosed {
+					g.Log().Line(true).Error(ctx, err)
+				}
+			}()
+
 			s.Run()
 			return nil
 		},

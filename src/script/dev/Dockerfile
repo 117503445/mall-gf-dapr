@@ -1,5 +1,5 @@
 FROM 117503445/dev-golang
 
-RUN pacman -S nodejs npm yarn --noconfirm
+RUN pacman -Syyu nodejs npm yarn --noconfirm
 RUN yarn config set registry https://registry.npmmirror.com/
 RUN wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash
