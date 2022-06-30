@@ -32,6 +32,7 @@ type GetRes struct {
 	Desc   string
 	Stock  int
 	Price  int
+	CreatorID string
 }
 
 

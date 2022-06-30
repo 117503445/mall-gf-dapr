@@ -7,6 +7,7 @@ import (
 	"117503445/mall-gf-dapr/app/utility"
 	"context"
 
+	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/util/gconv"
 )
 
@@ -17,8 +18,9 @@ var (
 type cProduct struct{}
 
 func (c *cProduct) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, error) {
-
 	userID, err := utility.GetUserID(ctx)
+
+	g.Log().Line(true).Debug(ctx, g.Map{"userID": userID})
 
 	if err != nil {
 		return nil, err
@@ -61,7 +63,6 @@ func (c *cProduct) GetById(ctx context.Context, req *v1.GetReq) (*v1.GetRes, err
 }
 
 func (c *cProduct) DeleteById(ctx context.Context, req *v1.DeleteReq) (*v1.DeleteRes, error) {
-
 	product, err := service.Product.GetById(ctx, req.Id)
 	if err != nil {
 		return nil, err
@@ -82,6 +83,8 @@ func (c *cProduct) DeleteById(ctx context.Context, req *v1.DeleteReq) (*v1.Delet
 	}
 
 	if product.CreatorId != userID {
+		g.Log().Line(true).Debug(ctx, g.Map{"userID": userID, "product.CreatorId": product.CreatorId})
+
 		return &v1.DeleteRes{
 			MetaInfo: utility.RspMetaInfo{
 				Code: 2,
