@@ -19,14 +19,14 @@ func (c *cOrder) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, 
 	g.Log().Line(true).Debug(ctx, g.Map{"M": "order create"})
 	content := &dapr.DataContent{
 		ContentType: "application/json",
-		Data:        []byte(`{ "id": "a123", "value": "demo", "valid": true }`),
+		Data:        []byte(`{ "id": 1 }`),
 	}
 
-	resp, err := service.DaprClient.InvokeMethodWithContent(ctx, "product", "echo", "post", content)
+	resp, err := service.DaprClient.InvokeMethodWithContent(ctx, "product", "GetProduct", "post", content)
 	if err != nil {
 		g.Log().Line(true).Error(ctx, err)
 	} else {
-		g.Log().Line(true).Debug(ctx, g.Map{"resp": resp})
+		g.Log().Line(true).Debug(ctx, g.Map{"resp": string(resp)})
 	}
 
 	// userID, err := utility.GetUserID(ctx)

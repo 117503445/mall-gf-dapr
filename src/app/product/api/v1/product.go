@@ -17,7 +17,7 @@ type CreateReq struct {
 type CreateRes struct {
 	g.Meta   `mime:"application/json"`
 	MetaInfo utility.RspMetaInfo `json:"-"`
-	Id int
+	Id       int
 }
 
 type GetReq struct {
@@ -26,15 +26,14 @@ type GetReq struct {
 }
 
 type GetRes struct {
-	g.Meta   `mime:"application/json"`
-	MetaInfo utility.RspMetaInfo `json:"-"`
-	Name   string
-	Desc   string
-	Stock  int
-	Price  int
+	g.Meta    `mime:"application/json"`
+	MetaInfo  utility.RspMetaInfo `json:"-"`
+	Name      string
+	Desc      string
+	Stock     int
+	Price     int
 	CreatorID string
 }
-
 
 type UpdateReq struct {
 	g.Meta `path:"/:id" tags:"product" method:"put"`
@@ -50,7 +49,6 @@ type UpdateRes struct {
 	MetaInfo utility.RspMetaInfo `json:"-"`
 }
 
-
 type DeleteReq struct {
 	g.Meta `path:"/:id" tags:"product" method:"delete"`
 	Id     int
@@ -61,3 +59,16 @@ type DeleteRes struct {
 	MetaInfo utility.RspMetaInfo `json:"-"`
 }
 
+type GetProductRPCReq struct {
+	Id int
+}
+
+type GetProductRPCRes struct {
+	Code int
+
+	Name      string
+	Desc      string
+	Stock     int
+	Price     int
+	CreatorID string
+}

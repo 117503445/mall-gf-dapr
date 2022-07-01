@@ -45,10 +45,10 @@ var (
 			go func() {
 				daprServer := daprd.NewService(":28001")
 
-				if err := daprServer.AddServiceInvocationHandler("echo", rpc.EchoHandler); err != nil {
+				if err := daprServer.AddServiceInvocationHandler("GetProduct", rpc.GetProduct); err != nil {
 					g.Log().Line(true).Error(ctx, err)
 				}
-				g.Log().Line(true).Debug(ctx, "starting dapr server",)
+				g.Log().Line(true).Debug(ctx, "starting dapr server")
 				if err := daprServer.Start(); err != nil && err != http.ErrServerClosed {
 					g.Log().Line(true).Error(ctx, err)
 				}

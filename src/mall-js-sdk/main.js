@@ -95,6 +95,8 @@ assertCode(response, 1)
 
 console.log('product success')
 
+await initDB()
+
 await axios.post("http://127.0.0.1:8002/api/order", {}, getHeader());
 
 console.log('order success')
