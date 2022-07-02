@@ -13,15 +13,16 @@ cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/user -l "mysql:root
 cd /root/project/mall-gf-dapr/src/app/template && gf run main.go
 
 cd /root/project/mall-gf-dapr/src/app/product && gf run main.go
-clear && cd /root/project/mall-gf-dapr/src/app/product && dapr run --app-port 28001 --app-id product --app-protocol http --dapr-http-port 3500 -- gf run main.go
 cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/product -l "mysql:root:12345678@tcp(db:3306)/product"
+clear && cd /root/project/mall-gf-dapr/src/app/product && dapr run --app-port 28001 --app-id product --dapr-grpc-port 3500 -- gf run main.go
 
 cd /root/project/mall-gf-dapr/src/app/order && gf run main.go
-clear && cd /root/project/mall-gf-dapr/src/app/order &&  dapr run --app-port 28002 --app-id order --app-protocol http --dapr-http-port 3501 -- gf run main.go
 cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/order -l "mysql:root:12345678@tcp(db:3306)/order"
+clear && cd /root/project/mall-gf-dapr/src/app/order &&  dapr run --app-port 28002 --app-id order --dapr-grpc-port 3501 -- gf run main.go
 
+dapr dashboard
 
-cd /root/project/mall-gf-dapr/src/mall-js-sdk && node main.js
+clear && cd /root/project/mall-gf-dapr/src/mall-js-sdk && node main.js
 
 ```
 
