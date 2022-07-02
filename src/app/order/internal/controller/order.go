@@ -3,10 +3,12 @@ package controller
 import (
 	v1 "117503445/mall-gf-dapr/app/order/api/v1"
 	"117503445/mall-gf-dapr/app/order/internal/service"
+	"117503445/mall-gf-dapr/app/order/model/entity"
+	"117503445/mall-gf-dapr/app/utility"
 	"context"
 
 	dapr "github.com/dapr/go-sdk/client"
-	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/util/gconv"
 	"google.golang.org/protobuf/proto"
 
 	productV1 "117503445/mall-gf-dapr/app/product/api/v1"
@@ -19,15 +21,11 @@ var (
 type cOrder struct{}
 
 func (c *cOrder) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, error) {
-	g.Log().Line(true).Debug(ctx, g.Map{"M": "order create"})
-
-	rq := &productV1.GetProductRPCReq{
+	dt, err := proto.Marshal(&productV1.GetProductRPCReq{
 		Id: int32(req.ProductId),
-	}
-
-	dt, err := proto.Marshal(rq)
+	})
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	content := &dapr.DataContent{
@@ -37,36 +35,38 @@ func (c *cOrder) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, 
 
 	resp, err := service.DaprClient.InvokeMethodWithContent(ctx, "product", "GetProduct", "post", content)
 	if err != nil {
-		g.Log().Line(true).Error(ctx, err)
-	} else {
-		// g.Log().Line(true).Debug(ctx, g.Map{"resp": string(resp)})
-		rs := &productV1.GetProductRPCRes{}
-		if err := proto.Unmarshal(resp, rs); err != nil {
-			panic(err)
-		}
-		g.Log().Line(true).Debug(ctx, rs)
-
+		return nil, err
 	}
 
-	// userID, err := utility.GetUserID(ctx)
+	rs := &productV1.GetProductRPCRes{}
+	if err := proto.Unmarshal(resp, rs); err != nil {
+		return nil, err
+	}
 
-	// g.Log().Line(true).Debug(ctx, g.Map{"userID": userID})
+	if rs.Code == 1 {
+		return nil, utility.ExpectedError{
+			Code: 1,
+			Msg:  "产品不存在",
+		}
+	}
 
-	// if err != nil {
-	// 	return nil, err
-	// }
+	order := &entity.Order{}
+	if err = gconv.Struct(req, &order); err != nil {
+		return nil, err
+	}
 
-	// order := &entity.Order{}
-	// if err = gconv.Struct(req, &order); err != nil {
-	// 	return nil, err
-	// }
+	userID, err := utility.GetUserID(ctx)
+	if err != nil {
+		return nil, err
+	}
+	order.ConsumerId = userID
 
-	// id, err := service.Order.Create(ctx, order)
-	// if err != nil {
-	// 	return nil, err
-	// }
+	id, err := service.Order.Create(ctx, order)
+	if err != nil {
+		return nil, err
+	}
 
 	return &v1.CreateRes{
-		// Id: int(id),
+		Id: int(id),
 	}, nil
 }

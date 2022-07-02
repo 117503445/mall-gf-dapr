@@ -24,7 +24,7 @@ func Auth(r *ghttp.Request) {
 
 				claims, err := auth.ParseJwtToken(token)
 				if err != nil {
-					g.Log().Line(true).Debug(ctx, "parse token failed, token =", token)
+					g.Log().Line(true).Debug(ctx, "parse token failed", "token", token, "err", err)
 				} else {
 					userId := claims.User.Id
 					r.SetCtxVar(CTX_USER_ID, userId)

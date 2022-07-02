@@ -20,7 +20,7 @@ var (
 		Usage: "main",
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
-
+			utility.InitCasdoor(ctx)
 			service.InitDapr()
 
 			s := g.Server()
@@ -28,6 +28,8 @@ var (
 				group.Middleware(utility.CORS)
 				group.Middleware(utility.HTTPLog)
 				group.Middleware(utility.Response)
+				group.Middleware(utility.Auth)
+				
 				group.Group("/api", func(group *ghttp.RouterGroup) {
 					group.Group("/order", func(group *ghttp.RouterGroup) {
 						group.Bind(

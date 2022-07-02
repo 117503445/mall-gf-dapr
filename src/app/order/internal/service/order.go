@@ -23,3 +23,9 @@ func (s *orderService) Create(ctx context.Context, order *entity.Order) (id int6
 
 	return id, nil
 }
+
+// GetProductSoldAmount return the number of products sold
+func (s *orderService) GetProductSoldAmount(ctx context.Context, productId int) (amount int64, err error){
+	// TODO
+	return 0, nil
+}
