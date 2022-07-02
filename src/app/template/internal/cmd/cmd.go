@@ -29,7 +29,7 @@ var (
 				group.Group("/api", func(group *ghttp.RouterGroup) {
 					group.Group("/template", func(group *ghttp.RouterGroup) {
 						group.Bind(
-							controller.template,
+							controller.Template,
 						)
 					})
 					group.Group("/operation", func(group *ghttp.RouterGroup) {
