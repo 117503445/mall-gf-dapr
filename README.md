@@ -15,6 +15,8 @@ cd /root/project/mall-gf-dapr/src/app/template && gf run main.go
 cd /root/project/mall-gf-dapr/src/app/product && gf run main.go
 cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/product -l "mysql:root:12345678@tcp(db:3306)/product"
 clear && cd /root/project/mall-gf-dapr/src/app/product && dapr run --app-port 28001 --app-id product --dapr-grpc-port 3500 -- gf run main.go
+cd /root/project/mall-gf-dapr/src/app/product/api && protoc --go_out=./ product.proto
+
 
 cd /root/project/mall-gf-dapr/src/app/order && gf run main.go
 cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/order -l "mysql:root:12345678@tcp(db:3306)/order"

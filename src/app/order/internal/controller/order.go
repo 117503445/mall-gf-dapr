@@ -7,6 +7,9 @@ import (
 
 	dapr "github.com/dapr/go-sdk/client"
 	"github.com/gogf/gf/v2/frame/g"
+	"google.golang.org/protobuf/proto"
+
+	productV1 "117503445/mall-gf-dapr/app/product/api/v1"
 )
 
 var (
@@ -17,16 +20,32 @@ type cOrder struct{}
 
 func (c *cOrder) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, error) {
 	g.Log().Line(true).Debug(ctx, g.Map{"M": "order create"})
+
+	rq := &productV1.GetProductRPCReq{
+		Id: int32(req.ProductId),
+	}
+
+	dt, err := proto.Marshal(rq)
+	if err != nil {
+		panic(err)
+	}
+
 	content := &dapr.DataContent{
 		ContentType: "application/json",
-		Data:        []byte(`{ "id": 1 }`),
+		Data:        dt,
 	}
 
 	resp, err := service.DaprClient.InvokeMethodWithContent(ctx, "product", "GetProduct", "post", content)
 	if err != nil {
 		g.Log().Line(true).Error(ctx, err)
 	} else {
-		g.Log().Line(true).Debug(ctx, g.Map{"resp": string(resp)})
+		// g.Log().Line(true).Debug(ctx, g.Map{"resp": string(resp)})
+		rs := &productV1.GetProductRPCRes{}
+		if err := proto.Unmarshal(resp, rs); err != nil {
+			panic(err)
+		}
+		g.Log().Line(true).Debug(ctx, rs)
+
 	}
 
 	// userID, err := utility.GetUserID(ctx)

@@ -59,16 +59,16 @@ type DeleteRes struct {
 	MetaInfo utility.RspMetaInfo `json:"-"`
 }
 
-type GetProductRPCReq struct {
-	Id int
-}
+// type GetProductRPCReq struct {
+// 	Id int
+// }
 
-type GetProductRPCRes struct {
-	Code int
+// type GetProductRPCRes struct {
+// 	Code int
 
-	Name      string
-	Desc      string
-	Stock     int
-	Price     int
-	CreatorID string
-}
+// 	Name      string
+// 	Desc      string
+// 	Stock     int
+// 	Price     int
+// 	CreatorID string
+// }
