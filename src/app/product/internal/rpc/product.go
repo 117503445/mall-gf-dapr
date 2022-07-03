@@ -6,12 +6,12 @@ import (
 	"context"
 
 	"github.com/dapr/go-sdk/service/common"
-	"github.com/gogf/gf/v2/util/gconv"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-func GetProduct(ctx context.Context, in *common.InvocationEvent) (out *common.Content, err error) {
-	req := &v1.GetProductRPCReq{}
+func Purchase(ctx context.Context, in *common.InvocationEvent) (out *common.Content, err error) {
+	req := &v1.PurchaseReq{}
 	if err := proto.Unmarshal(in.Data, req); err != nil {
 		return nil, err
 	}
@@ -22,26 +22,31 @@ func GetProduct(ctx context.Context, in *common.InvocationEvent) (out *common.Co
 	}
 
 	if product == nil {
-		res := &v1.GetProductRPCRes{
+		return makeResponse(&v1.PurchaseRes{
 			Code: 1,
-		}
-		if data, err := proto.Marshal(res); err != nil {
-			return nil, err
-		} else {
-			return &common.Content{
-				Data:        data,
-				ContentType: in.ContentType,
-				DataTypeURL: in.DataTypeURL,
-			}, nil
-		}
+		}, in)
 	}
 
-	res := &v1.GetProductRPCRes{}
-	if err := gconv.Struct(product, &res); err != nil {
+	if product.Stock < uint(req.Amount) {
+		return makeResponse(&v1.PurchaseRes{
+			Code: 2,
+		}, in)
+	}
+
+	product.Stock -= uint(req.Amount)
+
+	err = service.Product.UpdateById(ctx, int(product.Id), product)
+	if err != nil {
 		return nil, err
 	}
 
-	if data, err := proto.Marshal(res); err != nil {
+	return makeResponse(&v1.PurchaseRes{
+		Code: 0,
+	}, in)
+}
+
+func makeResponse(response protoreflect.ProtoMessage, in *common.InvocationEvent) (out *common.Content, err error) {
+	if data, err := proto.Marshal(response); err != nil {
 		return nil, err
 	} else {
 		return &common.Content{

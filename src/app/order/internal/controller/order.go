@@ -21,33 +21,12 @@ var (
 type cOrder struct{}
 
 func (c *cOrder) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, error) {
-	dt, err := proto.Marshal(&productV1.GetProductRPCReq{
-		Id: int32(req.ProductId),
+	data, err := proto.Marshal(&productV1.PurchaseReq{
+		Id:     int32(req.ProductId),
+		Amount: int32(req.Amount),
 	})
 	if err != nil {
 		return nil, err
-	}
-
-	content := &dapr.DataContent{
-		ContentType: "application/json",
-		Data:        dt,
-	}
-
-	resp, err := service.DaprClient.InvokeMethodWithContent(ctx, "product", "GetProduct", "post", content)
-	if err != nil {
-		return nil, err
-	}
-
-	rs := &productV1.GetProductRPCRes{}
-	if err := proto.Unmarshal(resp, rs); err != nil {
-		return nil, err
-	}
-
-	if rs.Code == 1 {
-		return nil, utility.ExpectedError{
-			Code: 1,
-			Msg:  "产品不存在",
-		}
 	}
 
 	order := &entity.Order{}
@@ -61,10 +40,38 @@ func (c *cOrder) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, 
 	}
 	order.ConsumerId = userID
 
+	resp, err := service.DaprClient.InvokeMethodWithContent(ctx, "product", "Purchase", "post", &dapr.DataContent{
+		ContentType: "application/json",
+		Data:        data,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	rs := &productV1.PurchaseRes{}
+	if err := proto.Unmarshal(resp, rs); err != nil {
+		return nil, err
+	}
+
+	switch rs.Code {
+	case 1:
+		return nil, utility.ExpectedError{
+			Code: 1,
+			Msg:  "产品不存在",
+		}
+	case 2:
+		return nil, utility.ExpectedError{
+			Code: 2,
+			Msg:  "产品库存不足",
+		}
+	}
+
 	id, err := service.Order.Create(ctx, order)
 	if err != nil {
 		return nil, err
 	}
+
+	// TODO 分布式事务
 
 	return &v1.CreateRes{
 		Id: int(id),

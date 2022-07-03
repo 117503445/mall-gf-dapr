@@ -111,7 +111,7 @@ POST http://localhost:8001/api/product
 |--------	|--------	|
 | name   	| 商品名 	|
 | desc   	| 描述   	|
-| stock  	| 库存   	|
+| stock  	| 当前库存 	|
 | price 	| 当前价格 	|
 
 ### 产品详情

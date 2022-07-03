@@ -97,6 +97,6 @@ console.log('product success')
 
 await initDB()
 
-await axios.post("http://127.0.0.1:8002/api/order", { "productID": 1}, getHeader());
+await axios.post("http://127.0.0.1:8002/api/order", { "productID": 1, "amount": 5}, getHeader());
 
 console.log('order success')

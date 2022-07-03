@@ -20,16 +20,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type GetProductRPCReq struct {
+type PurchaseReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id     int32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Amount int32 `protobuf:"varint,2,opt,name=amount,proto3" json:"amount,omitempty"`
 }
 
-func (x *GetProductRPCReq) Reset() {
-	*x = GetProductRPCReq{}
+func (x *PurchaseReq) Reset() {
+	*x = PurchaseReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_product_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -37,13 +38,13 @@ func (x *GetProductRPCReq) Reset() {
 	}
 }
 
-func (x *GetProductRPCReq) String() string {
+func (x *PurchaseReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetProductRPCReq) ProtoMessage() {}
+func (*PurchaseReq) ProtoMessage() {}
 
-func (x *GetProductRPCReq) ProtoReflect() protoreflect.Message {
+func (x *PurchaseReq) ProtoReflect() protoreflect.Message {
 	mi := &file_product_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,33 +56,35 @@ func (x *GetProductRPCReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetProductRPCReq.ProtoReflect.Descriptor instead.
-func (*GetProductRPCReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use PurchaseReq.ProtoReflect.Descriptor instead.
+func (*PurchaseReq) Descriptor() ([]byte, []int) {
 	return file_product_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GetProductRPCReq) GetId() int32 {
+func (x *PurchaseReq) GetId() int32 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-type GetProductRPCRes struct {
+func (x *PurchaseReq) GetAmount() int32 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type PurchaseRes struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Code      int32  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
-	Name      string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Desc      string `protobuf:"bytes,3,opt,name=desc,proto3" json:"desc,omitempty"`
-	Stock     int32  `protobuf:"varint,4,opt,name=stock,proto3" json:"stock,omitempty"`
-	Price     int32  `protobuf:"varint,5,opt,name=price,proto3" json:"price,omitempty"`
-	CreatorId string `protobuf:"bytes,6,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
+	Code int32 `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
 }
 
-func (x *GetProductRPCRes) Reset() {
-	*x = GetProductRPCRes{}
+func (x *PurchaseRes) Reset() {
+	*x = PurchaseRes{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_product_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -89,13 +92,13 @@ func (x *GetProductRPCRes) Reset() {
 	}
 }
 
-func (x *GetProductRPCRes) String() string {
+func (x *PurchaseRes) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetProductRPCRes) ProtoMessage() {}
+func (*PurchaseRes) ProtoMessage() {}
 
-func (x *GetProductRPCRes) ProtoReflect() protoreflect.Message {
+func (x *PurchaseRes) ProtoReflect() protoreflect.Message {
 	mi := &file_product_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -107,71 +110,30 @@ func (x *GetProductRPCRes) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetProductRPCRes.ProtoReflect.Descriptor instead.
-func (*GetProductRPCRes) Descriptor() ([]byte, []int) {
+// Deprecated: Use PurchaseRes.ProtoReflect.Descriptor instead.
+func (*PurchaseRes) Descriptor() ([]byte, []int) {
 	return file_product_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *GetProductRPCRes) GetCode() int32 {
+func (x *PurchaseRes) GetCode() int32 {
 	if x != nil {
 		return x.Code
 	}
 	return 0
 }
 
-func (x *GetProductRPCRes) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *GetProductRPCRes) GetDesc() string {
-	if x != nil {
-		return x.Desc
-	}
-	return ""
-}
-
-func (x *GetProductRPCRes) GetStock() int32 {
-	if x != nil {
-		return x.Stock
-	}
-	return 0
-}
-
-func (x *GetProductRPCRes) GetPrice() int32 {
-	if x != nil {
-		return x.Price
-	}
-	return 0
-}
-
-func (x *GetProductRPCRes) GetCreatorId() string {
-	if x != nil {
-		return x.CreatorId
-	}
-	return ""
-}
-
 var File_product_proto protoreflect.FileDescriptor
 
 var file_product_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
-	0x08, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x22, 0x22, 0x0a, 0x10, 0x47, 0x65, 0x74,
-	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x50, 0x43, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a,
-	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x22, 0x99, 0x01,
-	0x0a, 0x10, 0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x50, 0x43, 0x52,
-	0x65, 0x73, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05,
-	0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x65,
-	0x73, 0x63, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x64, 0x65, 0x73, 0x63, 0x12, 0x14,
-	0x0a, 0x05, 0x73, 0x74, 0x6f, 0x63, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x73,
-	0x74, 0x6f, 0x63, 0x6b, 0x12, 0x14, 0x0a, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x05, 0x20,
-	0x01, 0x28, 0x05, 0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x72,
-	0x65, 0x61, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
-	0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x49, 0x64, 0x42, 0x06, 0x5a, 0x04, 0x2e, 0x2f, 0x76,
-	0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x08, 0x74, 0x75, 0x74, 0x6f, 0x72, 0x69, 0x61, 0x6c, 0x22, 0x35, 0x0a, 0x0b, 0x50, 0x75, 0x72,
+	0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x02, 0x69, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75,
+	0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
+	0x22, 0x21, 0x0a, 0x0b, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x12,
+	0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x63,
+	0x6f, 0x64, 0x65, 0x42, 0x06, 0x5a, 0x04, 0x2e, 0x2f, 0x76, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -188,8 +150,8 @@ func file_product_proto_rawDescGZIP() []byte {
 
 var file_product_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_product_proto_goTypes = []interface{}{
-	(*GetProductRPCReq)(nil), // 0: tutorial.GetProductRPCReq
-	(*GetProductRPCRes)(nil), // 1: tutorial.GetProductRPCRes
+	(*PurchaseReq)(nil), // 0: tutorial.PurchaseReq
+	(*PurchaseRes)(nil), // 1: tutorial.PurchaseRes
 }
 var file_product_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -206,7 +168,7 @@ func file_product_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_product_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetProductRPCReq); i {
+			switch v := v.(*PurchaseReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -218,7 +180,7 @@ func file_product_proto_init() {
 			}
 		}
 		file_product_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetProductRPCRes); i {
+			switch v := v.(*PurchaseRes); i {
 			case 0:
 				return &v.state
 			case 1:

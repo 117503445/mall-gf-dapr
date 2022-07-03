@@ -3,15 +3,11 @@ package tutorial;
 
 option go_package = "./v1";
 
-message GetProductRPCReq {
+message PurchaseReq {
     int32 id = 1;
+    int32 amount = 2;
 }
 
-message GetProductRPCRes {
+message PurchaseRes {
 	int32 code = 1;
-	string name = 2;  
-	string desc = 3;
-	int32 stock = 4;
-	int32 price = 5;
-	string creator_id = 6; 
 }
