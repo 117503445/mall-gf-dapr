@@ -77,3 +77,27 @@ func (c *cOrder) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, 
 		Id: int(id),
 	}, nil
 }
+
+
+func (c *cOrder) GetById(ctx context.Context, req *v1.GetReq) (*v1.GetRes, error) {
+	product, err := service.Order.GetById(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	if product == nil {
+		return &v1.GetRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 1,
+				Msg:  "订单不存在",
+			},
+		}, nil
+	}
+
+	res := &v1.GetRes{}
+	if err := gconv.Struct(product, &res); err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}

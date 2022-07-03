@@ -17,3 +17,16 @@ type CreateRes struct {
 	MetaInfo utility.RspMetaInfo `json:"-"`
 	Id       int
 }
+
+type GetReq struct {
+	g.Meta `path:"/:id" tags:"order" method:"get"`
+	Id     int
+}
+
+type GetRes struct {
+	g.Meta     `mime:"application/json"`
+	MetaInfo   utility.RspMetaInfo `json:"-"`
+	ConsumerId string
+	ProductId  uint64
+	Amount     uint
+}

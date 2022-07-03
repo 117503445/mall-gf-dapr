@@ -264,7 +264,7 @@ Authorization: Bearer {"userID": 1}
 ### 订单详情
 
 ```http
-GET http://localhost:8002/api/order?id=1
+GET http://localhost:8002/api/order/1
 
 Authorization: Bearer {"userID": 1}
 ```
