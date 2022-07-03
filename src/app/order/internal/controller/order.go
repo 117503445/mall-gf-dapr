@@ -78,14 +78,13 @@ func (c *cOrder) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes, 
 	}, nil
 }
 
-
 func (c *cOrder) GetById(ctx context.Context, req *v1.GetReq) (*v1.GetRes, error) {
-	product, err := service.Order.GetById(ctx, req.Id)
+	order, err := service.Order.GetById(ctx, req.Id)
 	if err != nil {
 		return nil, err
 	}
 
-	if product == nil {
+	if order == nil {
 		return &v1.GetRes{
 			MetaInfo: utility.RspMetaInfo{
 				Code: 1,
@@ -95,9 +94,47 @@ func (c *cOrder) GetById(ctx context.Context, req *v1.GetReq) (*v1.GetRes, error
 	}
 
 	res := &v1.GetRes{}
-	if err := gconv.Struct(product, &res); err != nil {
+	if err := gconv.Struct(order, &res); err != nil {
 		return nil, err
 	}
 
 	return res, nil
+}
+
+func (c *cOrder) DeleteById(ctx context.Context, req *v1.DeleteReq) (*v1.DeleteRes, error) {
+	// TODO 恢复库存
+	order, err := service.Order.GetById(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	if order == nil {
+		return &v1.DeleteRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 1,
+				Msg:  "订单不存在",
+			},
+		}, nil
+	}
+
+	userID, err := utility.GetUserID(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	if order.ConsumerId != userID {
+		return &v1.DeleteRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 2,
+				Msg:  "非订单创建者",
+			},
+		}, nil
+	}
+
+	err = service.Order.DeleteById(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	return nil, nil
 }

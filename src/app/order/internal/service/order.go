@@ -24,13 +24,12 @@ func (s *orderService) Create(ctx context.Context, order *entity.Order) (id int6
 	return id, nil
 }
 
-// GetProductSoldAmount return the number of products sold
-func (s *orderService) GetProductSoldAmount(ctx context.Context, productId int) (amount int64, err error) {
-	// TODO
-	return 0, nil
+func (s *orderService) GetById(ctx context.Context, id int) (order *entity.Order, err error) {
+	err = dao.Order.Ctx(ctx).Where(dao.Order.Columns().Id, id).Scan(&order)
+	return order, err
 }
 
-func (s *orderService) GetById(ctx context.Context, id int) (product *entity.Order, err error) {
-	err = dao.Order.Ctx(ctx).Where(dao.Order.Columns().Id, id).Scan(&product)
-	return product, err
+func (s *orderService) DeleteById(ctx context.Context, id int) (err error) {
+	_, err = dao.Order.Ctx(ctx).Where(dao.Order.Columns().Id, id).Delete()
+	return err
 }

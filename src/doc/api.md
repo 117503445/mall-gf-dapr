@@ -287,48 +287,6 @@ Authorization: Bearer {"userID": 1}
 }
 ```
 
-### 订单更新
-
-```http
-PUT http://localhost:8002/api/order?id=1
-
-Authorization: Bearer {"userID": 1}
-
-{
-    "amount": 3
-}
-```
-
-```json
-{
-    "code": 0,
-    "message": "success",
-    "data": {
-        "id": 1,
-        "productID": 1,
-        "amount": 3
-    }
-}
-
-{
-    "code": 1,
-    "message": "订单不存在",
-    "data": null
-}
-
-{
-    "code": 2,
-    "message": "产品不存在",
-    "data": null
-}
-
-{
-    "code": 3,
-    "message": "产品库存不足",
-    "data": null
-}
-```
-
 ### 订单删除
 
 ```http

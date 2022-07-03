@@ -35,7 +35,7 @@ func (c *cProduct) Create(ctx context.Context, req *v1.CreateReq) (*v1.CreateRes
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return &v1.CreateRes{
 		Id: int(id),
 	}, nil

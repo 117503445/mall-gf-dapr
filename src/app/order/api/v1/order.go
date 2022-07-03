@@ -30,3 +30,13 @@ type GetRes struct {
 	ProductId  uint64
 	Amount     uint
 }
+
+type DeleteReq struct {
+	g.Meta `path:"/:id" tags:"order" method:"delete"`
+	Id     int
+}
+
+type DeleteRes struct {
+	g.Meta   `mime:"application/json"`
+	MetaInfo utility.RspMetaInfo `json:"-"`
+}

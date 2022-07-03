@@ -58,17 +58,3 @@ type DeleteRes struct {
 	g.Meta   `mime:"application/json"`
 	MetaInfo utility.RspMetaInfo `json:"-"`
 }
-
-// type GetProductRPCReq struct {
-// 	Id int
-// }
-
-// type GetProductRPCRes struct {
-// 	Code int
-
-// 	Name      string
-// 	Desc      string
-// 	Stock     int
-// 	Price     int
-// 	CreatorID string
-// }
