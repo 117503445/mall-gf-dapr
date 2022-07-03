@@ -33,3 +33,8 @@ func (s *orderService) DeleteById(ctx context.Context, id int) (err error) {
 	_, err = dao.Order.Ctx(ctx).Where(dao.Order.Columns().Id, id).Delete()
 	return err
 }
+
+func (s *orderService) GetListByUserId(ctx context.Context, userId string) (orders []*entity.Order, err error) {
+	err = dao.Order.Ctx(ctx).Where(dao.Order.Columns().ConsumerId, userId).Scan(&orders)
+	return orders, err
+}

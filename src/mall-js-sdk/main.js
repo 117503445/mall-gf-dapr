@@ -97,9 +97,12 @@ console.log('product success')
 
 await initDB()
 
-await axios.post("http://127.0.0.1:8002/api/order", { "productID": 1, "amount": 5}, getHeader());
+await axios.post("http://127.0.0.1:8002/api/order", { "productID": 1, "amount": 5 }, getHeader());
 
-response = await axios.get("http://127.0.0.1:8002/api/order/1");
+response = await axios.get("http://127.0.0.1:8002/api/order/2");
+assertSuccess(response)
+
+response = await axios.get("http://127.0.0.1:8002/api/order/me", getHeader());
 assertSuccess(response)
 
 console.log('order success')

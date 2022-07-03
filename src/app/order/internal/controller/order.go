@@ -138,3 +138,22 @@ func (c *cOrder) DeleteById(ctx context.Context, req *v1.DeleteReq) (*v1.DeleteR
 
 	return nil, nil
 }
+
+func (c *cOrder) GetList(ctx context.Context, req *v1.GetListReq) (*v1.GetListRes, error) {
+	userID, err := utility.GetUserID(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	orders, err := service.Order.GetListByUserId(ctx, userID)
+	if err != nil {
+		return nil, err
+	}
+
+	res := &v1.GetListRes{}
+	if err := gconv.Struct(orders, &res.Items); err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
