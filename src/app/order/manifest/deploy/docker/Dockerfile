@@ -5,7 +5,7 @@ WORKDIR /root/project
 COPY go.mod .
 COPY go.sum .
 RUN go mod download
-COPY . .
+COPY order .
 RUN go build -ldflags="-s -w" -o server
 
 FROM alpine:3.15 as prod
