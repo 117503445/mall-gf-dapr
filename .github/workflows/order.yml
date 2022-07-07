@@ -18,7 +18,7 @@ jobs:
         uses: docker/metadata-action@v3
         with:
           images: |
-            "117503445/mall-gf-dapr-mall"
+            "117503445/mall-gf-dapr-order"
           tags: |
             type=schedule
             type=ref,event=branch
