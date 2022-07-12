@@ -28,6 +28,10 @@ var (
 				group.Middleware(utility.Response)
 				group.Middleware(utility.Auth)
 
+				group.Bind(
+					controller.Hello,
+				)
+
 				group.Group("/api", func(group *ghttp.RouterGroup) {
 					group.Group("/product", func(group *ghttp.RouterGroup) {
 						group.Bind(

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	v1 "117503445/mall-gf-dapr/app/order/api/v1"
+	v1 "117503445/mall-gf-dapr/app/product/api/v1"
 	"117503445/mall-gf-dapr/app/utility"
 	"context"
 )
@@ -18,6 +18,6 @@ func (c *cHello) Home(ctx context.Context, req *v1.HelloReq) (res *v1.HelloRes, 
 			Code: 0,
 			Msg:  "ok",
 		},
-		Version: "order 2022-0713-0053",
+		Version: "product 2022-0713-0053",
 	}, nil
 }
