@@ -29,7 +29,11 @@ var (
 				group.Middleware(utility.HTTPLog)
 				group.Middleware(utility.Response)
 				group.Middleware(utility.Auth)
-				
+
+				group.Bind(
+					controller.Hello,
+				)
+
 				group.Group("/api", func(group *ghttp.RouterGroup) {
 					group.Group("/order", func(group *ghttp.RouterGroup) {
 						group.Bind(
@@ -47,8 +51,7 @@ var (
 			go func() {
 				daprServer := daprd.NewService(":28002")
 
-
-				g.Log().Line(true).Debug(ctx, "starting dapr server",)
+				g.Log().Line(true).Debug(ctx, "starting dapr server")
 				if err := daprServer.Start(); err != nil && err != http.ErrServerClosed {
 					g.Log().Line(true).Error(ctx, err)
 				}

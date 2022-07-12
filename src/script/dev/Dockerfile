@@ -1,4 +1,4 @@
-FROM 117503445/dev-golang
+FROM registry.cn-hangzhou.aliyuncs.com/117503445/dev-golang
 
 RUN pacman -Syyu nodejs npm yarn protobuf --noconfirm
 RUN yarn config set registry https://registry.npmmirror.com/
