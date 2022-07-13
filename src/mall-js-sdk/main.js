@@ -22,10 +22,24 @@ function assertCode(response, code) {
     }
 }
 
+let cfg = {
+    "product": "http://127.0.0.1:8001",
+    "order": "http://127.0.0.1:8002"
+}
+
+let prod = true
+if (prod) {
+    cfg = {
+        "product": "http://product.mall-gf-dapr.k8s.com:23333",
+        "order": "http://order.mall-gf-dapr.k8s.com:23333"
+    }
+}
+
 async function initDB() {
     // await axios.post("http://127.0.0.1:8000/api/operation/initDB")
-    await axios.post("http://127.0.0.1:8001/api/operation/initDB")
-    await axios.post("http://127.0.0.1:8002/api/operation/initDB")
+
+    await axios.post(`${cfg["product"]}/api/operation/initDB`)
+    await axios.post(`${cfg["order"]}/api/operation/initDB`)
 }
 
 await initDB()
@@ -56,7 +70,7 @@ await initDB()
 // assertSuccess(response.data)
 
 
-let response = await axios.post("http://127.0.0.1:8001/api/product", {
+let response = await axios.post(`${cfg["product"]}/api/product`, {
     'name': '苹果',
     'desc': '这个一个又大又圆的苹果，5块钱一个！',
     'stock': 100,
@@ -64,7 +78,7 @@ let response = await axios.post("http://127.0.0.1:8001/api/product", {
 });
 assertCode(response, 401)
 
-response = await axios.post("http://127.0.0.1:8001/api/product", {
+response = await axios.post(`${cfg["product"]}/api/product`, {
     'name': '苹果',
     'desc': '这个一个又大又圆的苹果，5块钱一个！',
     'stock': 100,
@@ -72,13 +86,13 @@ response = await axios.post("http://127.0.0.1:8001/api/product", {
 }, getHeader());
 assertSuccess(response)
 
-response = await axios.get("http://127.0.0.1:8001/api/product/2");
+response = await axios.get(`${cfg["product"]}/api/product/2`);
 assertSuccess(response)
 
-response = await axios.get("http://127.0.0.1:8001/api/product/114514"); // not exists
+response = await axios.get(`${cfg["product"]}/api/product/114514`); // not exists
 assertCode(response, 1)
 
-response = await axios.put("http://127.0.0.1:8001/api/product/2",
+response = await axios.put(`${cfg["product"]}/api/product/2`,
     {
         "name": "香蕉",
         "desc": "这个一个又大又圆的香蕉，5块钱一个！",
@@ -87,22 +101,22 @@ response = await axios.put("http://127.0.0.1:8001/api/product/2",
     }, getHeader());
 assertSuccess(response)
 
-response = await axios.delete("http://127.0.0.1:8001/api/product/2", getHeader());
+response = await axios.delete(`${cfg["product"]}/api/product/2`, getHeader());
 assertSuccess(response)
 
-response = await axios.delete("http://127.0.0.1:8001/api/product/2", getHeader());
+response = await axios.delete(`${cfg["product"]}/api/product/2`, getHeader());
 assertCode(response, 1)
 
 console.log('product success')
 
 await initDB()
 
-await axios.post("http://127.0.0.1:8002/api/order", { "productID": 1, "amount": 5 }, getHeader());
+await axios.post(`${cfg["order"]}/api/order`, { "productID": 1, "amount": 5 }, getHeader());
 
-response = await axios.get("http://127.0.0.1:8002/api/order/2");
+response = await axios.get(`${cfg["order"]}/api/order/2`);
 assertSuccess(response)
 
-response = await axios.get("http://127.0.0.1:8002/api/order/me", getHeader());
+response = await axios.get(`${cfg["order"]}/api/order/me`, getHeader());
 assertSuccess(response)
 
 console.log('order success')
