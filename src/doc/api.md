@@ -290,7 +290,7 @@ Authorization: Bearer {"userID": 1}
 ### 订单删除
 
 ```http
-DELETE http://localhost:8002/api/order?id=1
+DELETE http://localhost:8002/api/order/1
 
 Authorization: Bearer {"userID": 1}
 ```
