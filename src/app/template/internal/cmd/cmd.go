@@ -25,7 +25,11 @@ var (
 				group.Middleware(utility.HTTPLog)
 				group.Middleware(utility.Response)
 				group.Middleware(utility.Auth)
-				
+
+				group.Bind(
+					controller.Hello,
+				)
+
 				group.Group("/api", func(group *ghttp.RouterGroup) {
 					group.Group("/template", func(group *ghttp.RouterGroup) {
 						group.Bind(
