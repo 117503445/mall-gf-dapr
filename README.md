@@ -22,6 +22,9 @@ cd /root/project/mall-gf-dapr/src/app/order && gf run main.go
 cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/order -l "mysql:root:12345678@tcp(db:3306)/order"
 clear && cd /root/project/mall-gf-dapr/src/app/order &&  dapr run --app-port 28002 --app-id order --dapr-grpc-port 3501 -- gf run main.go
 
+cd /root/project/mall-gf-dapr/src && gf gen dao --path ./app/pay -l "mysql:root:12345678@tcp(db:3306)/pay"
+clear && cd /root/project/mall-gf-dapr/src/app/pay &&  dapr run --app-port 28003 --app-id pay --dapr-grpc-port 3502 -- gf run main.go
+
 dapr dashboard
 
 clear && cd /root/project/mall-gf-dapr/src/mall-js-sdk && node main.js

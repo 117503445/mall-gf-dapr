@@ -1,0 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eros-pay
+spec:
+  pay:
+    spec:
+      containers:
+        - name : main
+          image: eros-pay:develop
