@@ -379,12 +379,12 @@ Authorization: Bearer {"userID": 1}
 
 | 字段   	| 意义   	                            |
 |--------	|--------	                            |
-| status	| 订单状态, 0-待支付, 1-已取消, 2-成功 	|
+| status	| 支付状态, 0-待支付, 1-已取消, 2-成功 	|
 
 ### 支付详情
 
 ```http
-GET http://localhost:8003/api/pay?id=1
+GET http://localhost:8003/api/pay/1
 
 Authorization: Bearer {"userID": 1}
 ```
@@ -409,7 +409,7 @@ Authorization: Bearer {"userID": 1}
 ### 支付回调
 
 ```http
-POST http://localhost:8003/api/pay/callback?id=1
+POST http://localhost:8003/api/pay/callback/1
 
 {
     "amount": "20",
@@ -453,7 +453,7 @@ POST http://localhost:8003/api/pay/callback?id=1
 ### 支付取消
 
 ```http
-POST http://localhost:8003/api/pay/cancel?id=1
+POST http://localhost:8003/api/pay/cancel/1
 
 Authorization: Bearer {"userID": 1}
 ```
