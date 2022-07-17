@@ -409,12 +409,13 @@ Authorization: Bearer {"userID": 1}
 ### 支付回调
 
 ```http
-POST http://localhost:8003/api/pay/callback/1
+POST http://localhost:8003/api/pay/callback
 
 {
-    "amount": "20",
+    "id": 1,
     "source": "alipay",
-    "sign": "signed-by-alipay"
+    "sign": "signed-by-alipay",
+    "amount": 20
 }
 ```
 
@@ -439,12 +440,18 @@ POST http://localhost:8003/api/pay/callback/1
 
 {
     "code": 2,
-    "message": "订单不存在",
+    "message": "不支持的支付提供商",
     "data": null
 }
 
 {
     "code": 3,
+    "message": "订单不存在",
+    "data": null
+}
+
+{
+    "code": 4,
     "message": "金额错误",
     "data": null
 }

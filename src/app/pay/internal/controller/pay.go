@@ -7,10 +7,7 @@ import (
 	"117503445/mall-gf-dapr/app/utility"
 	"context"
 
-	// dapr "github.com/dapr/go-sdk/client"
 	"github.com/gogf/gf/v2/util/gconv"
-	// "google.golang.org/protobuf/proto"
-	// productV1 "117503445/mall-gf-dapr/app/product/api/v1"
 )
 
 var (
@@ -63,4 +60,42 @@ func (c *cPay) GetById(ctx context.Context, req *v1.GetReq) (*v1.GetRes, error) 
 	}
 
 	return res, nil
+}
+
+func (c *cPay) Callback(ctx context.Context, req *v1.CallbackReq) (*v1.CallbackRes, error) {
+	
+	switch req.Source {
+	case "alipay":
+		if req.Sign != "signed-by-alipay" {
+			return &v1.CallbackRes{
+				MetaInfo: utility.RspMetaInfo{
+					Code: 1,
+					Msg:  "支付提供商验签失败",
+				},
+			}, nil
+		}
+	default:
+		return &v1.CallbackRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 2,
+				Msg:  "不支持的支付提供商",
+			},
+		}, nil
+	}
+
+	pay, err := service.Pay.GetById(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+
+	if pay == nil {
+		return &v1.CallbackRes{
+			MetaInfo: utility.RspMetaInfo{
+				Code: 1,
+				Msg:  "支付订单不存在",
+			},
+		}, nil
+	}
+
+	return nil, nil
 }

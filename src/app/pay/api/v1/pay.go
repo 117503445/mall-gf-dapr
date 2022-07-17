@@ -31,7 +31,7 @@ type GetRes struct {
 }
 
 type CallbackReq struct {
-	g.Meta `path:"/callback/:id" tags:"pay" method:"post"`
+	g.Meta `path:"/callback" tags:"pay" method:"post"`
 
 	Id     int
 	Amount int

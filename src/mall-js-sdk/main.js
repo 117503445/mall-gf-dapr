@@ -17,7 +17,7 @@ function assertSuccess(response) {
 
 function assertCode(response, code) {
     if (response.data['code'] != code) {
-        console.log("response", response)
+        console.log("response", response.data)
         throw `rsp.code = ${response.data['code']}, code = ${code}`;
     }
 }
@@ -130,5 +130,14 @@ assertSuccess(response)
 
 response = await axios.get(`${cfg["pay"]}/api/pay/1`, getHeader());
 assertSuccess(response)
+
+response = await axios.post(`${cfg["pay"]}/api/pay/callback`, {
+    "id": 1,
+    "source": "alipay",
+    "sign": "signed-by-alipay",
+    "amount": 20
+}, getHeader());
+assertSuccess(response)
+
 
 console.log('pay success')
