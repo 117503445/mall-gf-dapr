@@ -452,6 +452,22 @@ POST http://localhost:8003/api/pay/callback
 
 {
     "code": 4,
+    "message": "订单已取消",
+    "data": {
+        "status": 0
+    }
+}
+
+{
+    "code": 5,
+    "message": "订单已支付",
+    "data": {
+        "status": 0
+    }
+}
+
+{
+    "code": 6,
     "message": "金额错误",
     "data": null
 }
@@ -460,7 +476,7 @@ POST http://localhost:8003/api/pay/callback
 ### 支付取消
 
 ```http
-POST http://localhost:8003/api/pay/cancel/1
+POST http://localhost:8003/api/pay/1/cancel
 
 Authorization: Bearer {"userID": 1}
 ```

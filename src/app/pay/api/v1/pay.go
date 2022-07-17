@@ -47,7 +47,7 @@ type CallbackRes struct {
 
 
 type CancelReq struct {
-	g.Meta `path:"/cancel/:id" tags:"pay" method:"post"`
+	g.Meta `path:"/:id/cancel" tags:"pay" method:"post"`
 
 	Id     int
 }

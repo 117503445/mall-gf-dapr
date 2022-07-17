@@ -139,5 +139,7 @@ response = await axios.post(`${cfg["pay"]}/api/pay/callback`, {
 }, getHeader());
 assertSuccess(response)
 
+response = await axios.post(`${cfg["pay"]}/api/pay/1/cancel`, getHeader());
+assertSuccess(response)
 
 console.log('pay success')
