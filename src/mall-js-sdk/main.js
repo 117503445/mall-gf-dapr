@@ -24,14 +24,15 @@ function assertCode(response, code) {
 
 let cfg = {
     "product": "http://127.0.0.1:8001",
-    "order": "http://127.0.0.1:8002"
+    "order": "http://127.0.0.1:8002",
+    "pay": "http://127.0.0.1:8003"
 }
 
-let prod = true
+let prod = false
 if (prod) {
     cfg = {
-        "product": "http://product.mall-gf-dapr.k8s.com:23333",
-        "order": "http://order.mall-gf-dapr.k8s.com:23333"
+        "product": "http://product.mall-gf-dapr.local.117503445.top:23333",
+        "order": "http://order.mall-gf-dapr.local.117503445.top:23333"
     }
 }
 
@@ -120,3 +121,14 @@ response = await axios.get(`${cfg["order"]}/api/order/me`, getHeader());
 assertSuccess(response)
 
 console.log('order success')
+
+response = await axios.post(`${cfg["pay"]}/api/pay`, {
+    'orderID': 1
+}, getHeader());
+assertSuccess(response)
+
+
+response = await axios.get(`${cfg["pay"]}/api/pay/1`, getHeader());
+assertSuccess(response)
+
+console.log('pay success')
