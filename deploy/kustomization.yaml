@@ -7,6 +7,10 @@ resources:
 - ./product/ingress.yaml
 - ./product/service.yaml
 
+- ./order/deployment.yaml
+- ./order/ingress.yaml
+- ./order/service.yaml
+
 configMapGenerator:
   - name: product-config
     files:
@@ -16,3 +20,12 @@ configMapGenerator:
     files:
       - ./product/sql/structure.sql
       - ./product/sql/dev-data.sql
+
+  - name: order-config
+    files:
+      - ./order/config/config.yaml
+      - ./order/config/pub.pem
+  - name: order-sql
+    files:
+      - ./order/sql/structure.sql
+      - ./order/sql/dev-data.sql

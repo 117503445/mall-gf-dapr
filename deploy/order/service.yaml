@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order
+  namespace: mall-gf-dapr
+spec:
+  # type: NodePort
+  ports:
+  - name: http
+    targetPort: 8002
+    port: 80
+    # nodePort: 30163
+  selector:
+    app: order

@@ -1,29 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: product
+  name: order
   namespace: mall-gf-dapr
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: product
+      app: order
   template:
     metadata:
       labels:
-        app: product
+        app: order
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/app-id: "product"
-        dapr.io/app-port: "28001"
+        dapr.io/app-id: "order"
+        dapr.io/app-port: "28002"
+        # dapr.io/config: "tracing"
     spec:
       containers:
-      - name: product
-        image: registry.cn-hangzhou.aliyuncs.com/117503445/mall-gf-dapr-product
+      - name: order
+        image: registry.cn-hangzhou.aliyuncs.com/117503445/mall-gf-dapr-order
         volumeMounts:
-        - name: product-config
+        - name: order-config
           mountPath: /root/manifest/config
-        - name: product-sql
+        - name: order-sql
           mountPath: /root/manifest/sql
         resources:
           requests:
@@ -33,9 +34,9 @@ spec:
             memory: "128Mi"
             cpu: "500m"
       volumes:
-      - name: product-config
+      - name: order-config
         configMap:
-          name: product-config
-      - name: product-sql
+          name: order-config
+      - name: order-sql
         configMap:
-          name: product-sql
+          name: order-sql

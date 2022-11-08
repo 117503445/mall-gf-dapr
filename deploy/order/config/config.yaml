@@ -1,0 +1,18 @@
+server:
+  address: ":8002"
+  openapiPath: "/api.json"
+  swaggerPath: "/swagger"
+  LogPath: "./data/log"
+  dumpRouterMap: false
+
+logger:
+  Path: "./data/log"
+  Level: "all"
+  Stdout: true
+
+database:
+  link: "mysql:root:12345678@tcp(db:3306)/order"
+  debug: true
+  sqlOnBoot:
+    - "./manifest/sql/structure.sql"
+    - "./manifest/sql/dev-data.sql"
