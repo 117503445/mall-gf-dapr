@@ -11,6 +11,9 @@ resources:
 - ./order/ingress.yaml
 - ./order/service.yaml
 
+- ./pay/deployment.yaml
+- ./pay/ingress.yaml
+- ./pay/service.yaml
 configMapGenerator:
   - name: product-config
     files:
@@ -29,3 +32,12 @@ configMapGenerator:
     files:
       - ./order/sql/structure.sql
       - ./order/sql/dev-data.sql
+
+  - name: pay-config
+    files:
+      - ./pay/config/config.yaml
+      - ./pay/config/pub.pem
+  - name: pay-sql
+    files:
+      - ./pay/sql/structure.sql
+      - ./pay/sql/dev-data.sql

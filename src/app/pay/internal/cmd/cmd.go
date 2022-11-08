@@ -2,7 +2,9 @@ package cmd
 
 import (
 	"context"
+	"net/http"
 
+	daprd "github.com/dapr/go-sdk/service/http"
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
@@ -43,6 +45,16 @@ var (
 					})
 				})
 			})
+
+			go func() {
+				daprServer := daprd.NewService(":28003")
+
+				g.Log().Line(true).Debug(ctx, "starting dapr server")
+				if err := daprServer.Start(); err != nil && err != http.ErrServerClosed {
+					g.Log().Line(true).Error(ctx, err)
+				}
+			}()
+
 			s.Run()
 			return nil
 		},
