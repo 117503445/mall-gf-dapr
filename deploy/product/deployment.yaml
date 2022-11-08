@@ -15,7 +15,12 @@ spec:
     spec:
       containers:
       - name: product
-        image: 117503445/mall-gf-dapr-product
+        image: registry.cn-hangzhou.aliyuncs.com/117503445/mall-gf-dapr-product
+        volumeMounts:
+        - name: product-config
+          mountPath: /root/manifest/config
+        - name: product-sql
+          mountPath: /root/manifest/sql
         resources:
           requests:
             memory: "64Mi"
@@ -23,4 +28,10 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
----
+      volumes:
+      - name: product-config
+        configMap:
+          name: product-config
+      - name: product-sql
+        configMap:
+          name: product-sql

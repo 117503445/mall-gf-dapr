@@ -1,0 +1,25 @@
+apiVersion: apisix.apache.org/v2beta3
+kind: ApisixUpstream
+metadata:
+  name: product
+  namespace: mall-gf-dapr
+spec:
+  loadbalancer:
+    type: ewma
+---
+apiVersion: apisix.apache.org/v2beta3
+kind: ApisixRoute
+metadata:
+  name: product
+  namespace: mall-gf-dapr
+spec:
+  http:
+  - name: product
+    match:
+      hosts:
+      - mall-gf-product.r630-k8s.117503445.top
+      paths:
+      - /*
+    backends:
+    - serviceName: product
+      servicePort: 80

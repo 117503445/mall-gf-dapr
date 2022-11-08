@@ -1,0 +1,18 @@
+namespace: mall-gf-dapr
+
+resources:
+- db.yaml
+- ./casdoor/casdoor.yaml
+- ./product/deployment.yaml
+- ./product/ingress.yaml
+- ./product/service.yaml
+
+configMapGenerator:
+  - name: product-config
+    files:
+      - ./product/config/config.yaml
+      - ./product/config/pub.pem
+  - name: product-sql
+    files:
+      - ./product/sql/structure.sql
+      - ./product/sql/dev-data.sql

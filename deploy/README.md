@@ -15,4 +15,8 @@ helm install phpmyadmin bitnami/phpmyadmin --namespace mall-gf-dapr --create-nam
 helm repo add dapr https://dapr.github.io/helm-charts/
 helm repo update
 helm upgrade --install dapr dapr/dapr --version=1.2 --namespace dapr-system --create-namespace --wait
+
+kubectl apply -k deploy
+kubectl apply -f deploy
+kubectl create cm casdoor-config --from-file=./deploy/casdoor/app.conf --namespace mall-gf-dapr
 ```

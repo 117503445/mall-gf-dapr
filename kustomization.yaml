@@ -1,6 +1,0 @@
-namespace: mall-gf-dapr
-
-configMapGenerator:
-- name: casdoor
-  files:
-  - ./casdoor/app.conf

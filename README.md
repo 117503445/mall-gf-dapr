@@ -53,8 +53,3 @@ http://localhost:18000/
 - product http://localhost:8001
 - order http://localhost:8002
 - pay http://localhost:8003
-
-## k8s
-
-kubectl apply -k deploy
-kubectl create cm casdoor-config --from-file=./deploy/casdoor/app.conf --namespace mall-gf-dapr
