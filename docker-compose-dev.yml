@@ -10,25 +10,25 @@ services:
       - ~/.dapr:/root/.dapr
     stdin_open: true
     tty: true
-  db:
-    image: mysql
-    restart: unless-stopped
-    environment:
-      - MYSQL_ROOT_PASSWORD=12345678
-      - MYSQL_ROOT_HOST=%
-    volumes:
-      - ./_data/mysql:/var/lib/mysql
-    cap_add:
-      - SYS_NICE  # CAP_SYS_NICE to avoid 'mbind: Operation not permitted'
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
-    restart: unless-stopped
-    ports:
-      - 3307:80
+  # db:
+  #   image: mysql
+  #   restart: unless-stopped
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=12345678
+  #     - MYSQL_ROOT_HOST=%
+  #   volumes:
+  #     - ./_data/mysql:/var/lib/mysql
+  #   cap_add:
+  #     - SYS_NICE  # CAP_SYS_NICE to avoid 'mbind: Operation not permitted'
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   environment:
+  #     PMA_HOST: db
+  #     PMA_PORT: 3306
+  #     PMA_ARBITRARY: 1
+  #   restart: unless-stopped
+  #   ports:
+  #     - 3307:80
   casdoor:
     image: casbin/casdoor:v1.152.0
     # image: casbin/casdoor@sha256:466a495dd6bfee08caf3d42249722139f41ac4bee9ef708b9294bfab4e0e7f69

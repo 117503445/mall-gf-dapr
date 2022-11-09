@@ -1,2 +1,0 @@
-INSERT INTO `order` (`id`, `created_at`, `updated_at`, `deleted_at`, `consumer_id`, `product_id`, `amount`) VALUES
-(1, '2022-07-03 13:10:37', '2022-07-03 13:10:37', NULL, 'fd44c9f5-0b16-4274-a6c0-0b8b12967a62', 1, 5);

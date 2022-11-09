@@ -1,2 +1,0 @@
-INSERT INTO `product` (`id`, `created_at`, `updated_at`, `deleted_at`, `name`, `desc`, `stock`, `price`, `creator_id`) VALUES
-(1, '2022-06-30 14:24:11', '2022-06-30 14:24:11', NULL, '香蕉', '这个一个又大又圆的香蕉，5块钱一个！', 100, 5, 'fd44c9f5-0b16-4274-a6c0-0b8b12967a62');

@@ -1,2 +1,0 @@
-INSERT INTO `pay` (`id`, `created_at`, `updated_at`, `deleted_at`, `consumer_id`, `order_id`, `status`) VALUES
-(1, '2022-07-15 16:12:33', '2022-07-15 16:12:33', NULL, 'fd44c9f5-0b16-4274-a6c0-0b8b12967a62', 1, 0);
