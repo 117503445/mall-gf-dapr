@@ -28,11 +28,12 @@ let cfg = {
     "pay": "http://127.0.0.1:8003"
 }
 
-let prod = false
+let prod = true
 if (prod) {
     cfg = {
-        "product": "http://product.mall-gf-dapr.local.117503445.top:23333",
-        "order": "http://order.mall-gf-dapr.local.117503445.top:23333"
+        "product": "https://mall-gf-product.r630-k8s.117503445.top:30001",
+        "order": "https://mall-gf-order.r630-k8s.117503445.top:30001",
+        "pay": "https://mall-gf-pay.r630-k8s.117503445.top:30001",
     }
 }
 
