@@ -18,6 +18,6 @@ func (c *cHello) Home(ctx context.Context, req *v1.HelloReq) (res *v1.HelloRes, 
 			Code: 0,
 			Msg:  "ok",
 		},
-		Version: "product 2022-0713-0053",
+		Version: "product 2022-1218-1119",
 	}, nil
 }

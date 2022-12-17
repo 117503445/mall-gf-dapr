@@ -2,5 +2,6 @@
 
 ```sh
 yarn
-node main.js
+yarn default
+yarn infinite
 ```
